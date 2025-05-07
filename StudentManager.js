@@ -81,7 +81,7 @@ class studentUI{
         this.mannager = mannager;
     }
     displayUI(){
-        console.log("\nWelcome to the Student Management System");
+        console.log("\nWelcome to the Student Management System\n");
         rl.question("1. Add Student\n2. Show all student \n3. Search student by name \n4. Statistics \n5. save to file \n6. exit\n",(option)=>
         {
             switch(option){
