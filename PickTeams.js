@@ -38,7 +38,7 @@ function isValidTeam(team, matchingPairs, incompatiblePairs){
 async function askPair(label){
     const pairs = [];
     const total = parseInt(await question(`Enter number of ${label} pairs: `));
-    if(isNaN(total) || total < 0|| total > 5){
+    if(isNaN(total) || total < 0|| total > coreMembers.length || total > reserveMembers.length){
         console.log("Invalid number of pairs. Please enter a positive integer.");
         return askPair(label);
     }
