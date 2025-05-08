@@ -51,6 +51,17 @@ async function askPair(label){
     return pairs;
 }
 
+async function canFormTeam(){
+    const teamForm = [];
+    console.log('first member ID is: ', leader);
+    const firstMember = await question('Enter ID of the seccond member: ');
+    const seccondMember = await question('Enter ID of the Last Member: ');
+    teamForm.push(parseInt(leader),parseInt(firstMember),parseInt(seccondMember));
+    const exist =  teams.filter(team => teamForm.every(item => team.includes(item))).length >0;
+    console.log(`Can ${teamForm} formed:`, exist);
+    return exist;
+}
+
 async function main(){
     const matchingPairs = await askPair('matching');
     const incompatiblePairs = await askPair('incompatible');
@@ -60,6 +71,10 @@ async function main(){
     console.log('Incompatible pairs:', incompatiblePairs);
     console.log('\nnumber of valid teams:', teams.filter(team => isValidTeam(team, matchingPairs, incompatiblePairs)).length);
     console.log('\nValid teams:', teams.filter(team => isValidTeam(team, matchingPairs, incompatiblePairs)));
+
+    await canFormTeam();
+
     rl.close();
 }
+
 main();
