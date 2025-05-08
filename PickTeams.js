@@ -51,14 +51,15 @@ async function askPair(label){
     return pairs;
 }
 
-async function canFormTeam(){
+async function canFormTeam(ValidTeam){
+    console.log('\n Form a team');
     const teamForm = [];
     console.log('first member ID is: ', leader);
     const firstMember = await question('Enter ID of the seccond member: ');
     const seccondMember = await question('Enter ID of the Last Member: ');
     teamForm.push(parseInt(leader),parseInt(firstMember),parseInt(seccondMember));
-    const exist =  teams.filter(team => teamForm.every(item => team.includes(item))).length >0;
-    console.log(`Can ${teamForm} formed:`, exist);
+    const exist =  ValidTeam.filter(team => teamForm.every(item => team.includes(item))).length >0;
+    console.log(`Can ${teamForm} formed a team:`, exist);
     return exist;
 }
 
@@ -69,10 +70,11 @@ async function main(){
     console.log("\nnumber of teams:", teams.length);
     console.log('\nMatching pairs:', matchingPairs);
     console.log('Incompatible pairs:', incompatiblePairs);
-    console.log('\nnumber of valid teams:', teams.filter(team => isValidTeam(team, matchingPairs, incompatiblePairs)).length);
-    console.log('\nValid teams:', teams.filter(team => isValidTeam(team, matchingPairs, incompatiblePairs)));
+    const validTeam = teams.filter(team => isValidTeam(team, matchingPairs, incompatiblePairs));
+    console.log('\nnumber of valid teams:', validTeam.length);
+    console.log('\nValid teams:',validTeam);
 
-    await canFormTeam();
+    await canFormTeam(validTeam);
 
     rl.close();
 }
